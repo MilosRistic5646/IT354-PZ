@@ -1,0 +1,135 @@
+{
+  "car": [
+    {
+      "id": 1,
+      "name": "Clio",
+      "description": "Elegantno i dinamično",
+      "image": "/slike/CLIO.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Captur",
+      "description": "Prilagodljiv i moderan",
+      "image": "/slike/CAPTUR.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Austral",
+      "description": "Performanse i stil",
+      "image": "/slike/AUSTRAL.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Megane",
+      "description": "Privlačna i prefinjena limuzina",
+      "image": "/slike/MEGANE.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Rafale",
+      "description": "E-TECH HYBRID",
+      "image": "/slike/RAFALE.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Symbioz",
+      "description": "E-TECH FULL HYBRID",
+      "image": "/slike/SYMBIOZ.jpg"
+    }
+  ],
+  "person": [
+    {
+      "id": 1,
+      "name": "John",
+      "surname": "Doe",
+      "username": "johndoe",
+      "password": "password123",
+      "role": "owner",
+      "JMBG": "1234567890123"
+    },
+    {
+      "id": 2,
+      "name": "Jane",
+      "surname": "Smith",
+      "username": "janesmith",
+      "password": "mypassword",
+      "role": "customer",
+      "JMBG": "9876543210987"
+    },
+    {
+      "id": 3,
+      "name": "Milos",
+      "surname": "Ristic",
+      "username": "milos",
+      "password": "123456",
+      "role": "admin",
+      "JMBG": "3001003730015"
+    }
+  ],
+  "ad": [
+    {
+      "id": 1,
+      "carId": 1,
+      "price": 15000
+    },
+    {
+      "id": 2,
+      "carId": 2,
+      "price": 35000
+    },
+    {
+      "id": 3,
+      "carId": 3,
+      "price": 30000
+    },
+    {
+      "id": 4,
+      "carId": 4,
+      "price": 25000
+    },
+    {
+      "id": 5,
+      "carId": 5,
+      "price": 45000
+    },
+    {
+      "id": 6,
+      "carId": 6,
+      "price": 55000
+    }
+  ],
+  "carousel": [
+  {
+    "id": 1,
+    "image": "src/assets/slike/hero-image1.jpg"
+  },
+  {
+    "id": 2,
+    "image": "src/assets/slike/hero-image2.jpg"
+  },
+  {
+    "id": 3,
+    "image": "src/assets/slike/hero-image3.jpg"
+  },
+  {
+    "id": 4,
+    "image": "src/assets/slike/hero-image4.jpg"
+  },
+  {
+    "id": 5,
+    "image": "src/assets/slike/hero-image5.jpg"
+  }
+],
+  "classifiedAd": [
+    {
+      "id": 1,
+      "idCar": 1,
+      "idPerson": 1
+    },
+    {
+      "id": 2,
+      "idCar": 2,
+      "idPerson": 2
+    }
+  ]
+}
