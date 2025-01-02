@@ -4,19 +4,18 @@ import Header from "@/assets/components/Header";
 import Footer from "@/assets/components/Footer";
 import Carousel from "@/assets/components/Carousel";
 import VehicleList from "@/assets/components/VehicleList";
-import Section from "@/assets/components/Section";
-
-// Stranice
 import Home from "@/assets/pages/Home";
 import VehiclePage from "@/assets/pages/VehiclePage";
 import ServicesPage from "@/assets/pages/ServicePage";
 import ContactPage from "@/assets/pages/ContactPage";
+import Login from "@/assets/pages/Login";
+import RegisterPage from "@/assets/pages/Register"; // Dodato: Stranica za registraciju
 
 const App = () => {
   const [vehicles, setVehicles] = useState([]);
 
-  // Učitaj podatke o vozilima iz db.json
   useEffect(() => {
+    // Povlačenje podataka o vozilima iz db.json
     fetch("/db.json")
       .then((response) => {
         if (!response.ok) {
@@ -33,10 +32,11 @@ const App = () => {
             image: ad?.image || "/slike/default.jpg",
           };
         });
-        console.log(vehiclesWithAds); // Provera da li se podaci učitavaju
         setVehicles(vehiclesWithAds);
       })
-      .catch((error) => console.error("Greška pri učitavanju podataka:", error));
+      .catch((error) =>
+        console.error("Greška pri učitavanju podataka o vozilima:", error)
+      );
   }, []);
 
   return (
@@ -59,6 +59,8 @@ const App = () => {
           <Route path="/vehicles" element={<VehiclePage vehicles={vehicles} />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegisterPage />} /> {/* Ruta za registraciju */}
         </Routes>
 
         {/* Zajednički Footer */}

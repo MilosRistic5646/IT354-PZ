@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Carousel = () => {
   const [images, setImages] = useState([]); // Stanje za slike
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate(); // Hook za navigaciju
 
   useEffect(() => {
     // Povlačenje slika sa JSON servera
@@ -22,7 +24,7 @@ const Carousel = () => {
     if (images.length > 0) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 5000); // Menjanje slike svakih 5 sekundi
+      }, 7000); // Menjanje slike svakih 7 sekundi
       return () => clearInterval(interval);
     }
   }, [images]);
@@ -71,10 +73,15 @@ const Carousel = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 className="text-4xl font-bold">Otkrijte Renault Vozila</h1>
         <p className="mt-4 text-lg">Inovacije koje pokreću vašu svakodnevicu</p>
-        <button className="mt-6 px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600">
+        <button
+          onClick={() => navigate("/login")}
+          className="mt-6 px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600"
+        >
           Uloguj se
         </button>
-        <button className="mt-6 ml-4 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900">
+        <button 
+          onClick={() => navigate("/register")}
+          className="mt-6 ml-4 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900">
           Registruj se
         </button>
       </div>
