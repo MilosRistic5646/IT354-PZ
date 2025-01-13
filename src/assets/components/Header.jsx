@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../slike/logo.jpg";
 
 const Header = () => {
@@ -13,18 +13,28 @@ const Header = () => {
           style={{ height: "64px", width: "auto", alignSelf: "flex-start" }}
         />
         <nav className="flex space-x-8">
-          <Link to="/" className="text-gray-700 hover:text-yellow-500">
-            Početna
-          </Link>
-          <Link to="/vehicles" className="text-gray-700 hover:text-yellow-500">
-            Vozila
-          </Link>
-          <Link to="/services" className="text-gray-700 hover:text-yellow-500">
-            Usluge
-          </Link>
-          <Link to="/contact" className="text-gray-700 hover:text-yellow-500">
-            Kontakt
-          </Link>
+        
+            <NavLink to="/" className={({ isActive }) => isActive 
+            ? "hover:text-gray-700 text-yellow-500"
+            : "text-gray-700 hover:text-yellow-500" } >
+              Početna
+            </NavLink>
+            <NavLink to="/vehicles" className={({ isActive }) => isActive 
+            ? "hover:text-gray-700 text-yellow-500"
+            : "text-gray-700 hover:text-yellow-500" } >
+              Vozila
+            </NavLink>
+            <NavLink to="/services" className={({ isActive }) => isActive 
+            ? "hover:text-gray-700 text-yellow-500"
+            : "text-gray-700 hover:text-yellow-500" } >
+              Usluge
+            </NavLink>
+            <NavLink to="/contact" className={({ isActive }) => isActive 
+            ? "hover:text-gray-700 text-yellow-500"
+            : "text-gray-700 hover:text-yellow-500" } >
+              Kontakt
+            </NavLink>
+        
         </nav>
       </div>
     </header>

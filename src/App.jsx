@@ -4,6 +4,7 @@ import Header from "@/assets/components/Header";
 import Footer from "@/assets/components/Footer";
 import Carousel from "@/assets/components/Carousel";
 import VehicleList from "@/assets/components/VehicleList";
+import HomeVehicleList from "@/assets/components/HomeVehicleList";
 import Home from "@/assets/pages/Home";
 import VehiclePage from "@/assets/pages/VehiclePage";
 import ServicesPage from "@/assets/pages/ServicePage";
@@ -47,16 +48,11 @@ const App = () => {
 
         {/* Definisanje ruta */}
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                carousel={<Carousel />}
-                vehicles={<VehicleList vehicles={vehicles} />}
+          <Route path="/" element={<Home carousel={<Carousel />} vehicles={<HomeVehicleList vehicles={vehicles} />}
               />
             }
           />
-          <Route path="/vehicles" element={<VehiclePage vehicles={vehicles} />} />
+          <Route path="/vehicles" element={<VehiclePage vehicles={<VehicleList vehicles={vehicles} />} />}/>
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<Login />} />

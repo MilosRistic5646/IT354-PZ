@@ -17,24 +17,17 @@ const VehicleList = () => {
       const cars = await carsResponse.json();
       const ads = await adsResponse.json();
 
-      // Logovanje podataka
-      console.log("Raw Cars Data:", cars);
-      console.log("Raw Ads Data:", ads);
-
       // Dodavanje cene za vozila
       const vehiclesWithPrice = cars.map((car) => {
-        const ad = ads.find((ad) => Number(ad.carId) === Number(car.id)); // Konverzija u brojeve
-        console.log(
-          `Car ID: ${car.id} (type: ${typeof car.id}), Ad carId: ${ad ? ad.carId : "No Ad"} (type: ${typeof ad?.carId}), Price: ${ad ? ad.price : "No price"}`
-        );
-
+        const ad = ads.find((ad) => Number(ad.carId) === Number(car.id));
         return {
           ...car,
-          price: ad ? ad.price : "Cena nije dostupna", // Dodaj cenu, ako postoji
+          price: ad ? ad.price : "Cena nije dostupna",
         };
       });
 
-      setVehicles(vehiclesWithPrice); // Ažuriraj stanje sa podacima
+      // Postavljanje prvih 3 vozila u stanje
+      setVehicles(vehiclesWithPrice.slice(0, 3));
     } catch (error) {
       console.error("Greška prilikom učitavanja podataka:", error);
     }
