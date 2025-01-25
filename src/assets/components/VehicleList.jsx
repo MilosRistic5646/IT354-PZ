@@ -17,24 +17,17 @@ const VehicleList = () => {
       const cars = await carsResponse.json();
       const ads = await adsResponse.json();
 
-      // Logovanje podataka
-      console.log("Raw Cars Data:", cars);
-      console.log("Raw Ads Data:", ads);
-
-      // Dodavanje cene za vozila
+      // Kombinovanje vozila sa oglasima
       const vehiclesWithPrice = cars.map((car) => {
-        const ad = ads.find((ad) => Number(ad.carId) === Number(car.id)); // Konverzija u brojeve
-        console.log(
-          `Car ID: ${car.id} (type: ${typeof car.id}), Ad carId: ${ad ? ad.carId : "No Ad"} (type: ${typeof ad?.carId}), Price: ${ad ? ad.price : "No price"}`
-        );
-
+        const ad = ads.find((ad) => Number(ad.carId) === Number(car.id));
         return {
           ...car,
-          price: ad ? ad.price : "Cena nije dostupna", // Dodaj cenu, ako postoji
+          price: ad ? ad.price : "Cena nije dostupna", // Cena nije dostupna ako nema oglasa
         };
       });
 
-      setVehicles(vehiclesWithPrice); // Ažuriraj stanje sa podacima
+      console.log("Vehicles with Price:", vehiclesWithPrice); // Logovanje za proveru
+      setVehicles(vehiclesWithPrice); // Ažuriranje stanja sa svim vozilima
     } catch (error) {
       console.error("Greška prilikom učitavanja podataka:", error);
     }
@@ -45,8 +38,9 @@ const VehicleList = () => {
     fetchVehicles();
   }, []);
 
+  // Fallback ako nema vozila
   if (!vehicles || vehicles.length === 0) {
-    return <div>No vehicles available</div>; // Ako nema vozila, prikaži poruku
+    return <div className="text-center text-gray-600">Trenutno nema dostupnih vozila.</div>;
   }
 
   return (
@@ -54,6 +48,7 @@ const VehicleList = () => {
       {vehicles.map((vehicle) => (
         <VehicleCard
           key={vehicle.id}
+          id={vehicle.id}
           name={vehicle.name}
           description={vehicle.description}
           price={vehicle.price}
