@@ -1,75 +1,99 @@
-import React from "react";
-import { User, Mail, Shield } from "lucide-react"; // Ikone iz lucide-react
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import Footer from "@/assets/components/Footer";
+import { UserContext } from "@/assets/context/UserContext";
 
-const SeeProfile = ({ user }) => {
-  if (!user) {
-    return (
-      <div className="flex justify-center items-center h-screen bg-gray-100">
-        <h1 className="text-2xl font-semibold text-gray-800">
-          Niste prijavljeni. Prijavite se kako biste videli svoj profil.
-        </h1>
-      </div>
-    );
-  }
+const Seemore = () => {
+  const { id } = useParams();
+  const { user } = useContext(UserContext); // Korisnik iz konteksta
+  const [vehicle, setVehicle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchVehicleDetails = async () => {
+      try {
+        const adResponse = await fetch(`http://localhost:3000/ad/${id}`);
+        if (!adResponse.ok) throw new Error("Greška pri učitavanju oglasa");
+        const ad = await adResponse.json();
+
+        const carResponse = await fetch(`http://localhost:3000/car/${ad.carId}`);
+        if (!carResponse.ok) throw new Error("Greška pri učitavanju podataka o vozilu");
+        const car = await carResponse.json();
+
+        setVehicle({ ...car, price: ad.price });
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVehicleDetails();
+  }, [id]);
+
+  const handleReserveClick = async () => {
+    if (!user) {
+      alert("Morate biti ulogovani da biste rezervisali vozilo.");
+      return;
+    }
+
+    try {
+      const classifiedAdResponse = await fetch("http://localhost:3000/classifiedAd");
+      const classifiedAds = await classifiedAdResponse.json();
+      const maxId = classifiedAds.length > 0 ? Math.max(...classifiedAds.map(ad => parseInt(ad.id))) : 0;
+
+      const reservation = {
+        id: (maxId + 1).toString(),
+        idCar: vehicle.id,
+        idPerson: user.id, // Koristi user.id iz konteksta
+      };
+
+      const postResponse = await fetch("http://localhost:3000/classifiedAd", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reservation),
+      });
+
+      if (postResponse.ok) {
+        alert("Rezervacija uspešna!");
+      } else {
+        alert("Došlo je do greške prilikom rezervacije. Pokušajte ponovo.");
+      }
+    } catch (error) {
+      console.error("Greška prilikom pristupa bazi:", error);
+      alert("Došlo je do greške. Pokušajte ponovo kasnije.");
+    }
+  };
+
+  if (loading) return <div className="flex-grow text-center">Učitavanje...</div>;
+  if (error) return <div className="flex-grow text-center text-red-500">Greška: {error}</div>;
+  if (!vehicle) return <div className="flex-grow text-center">Vozilo nije pronađeno.</div>;
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-500 to-indigo-500">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
-        <div className="text-center mb-6">
-          <div className="flex justify-center mb-4">
-            <img
-              src="https://via.placeholder.com/100" // Zameniti sa URL-om slike korisnika, ako postoji
-              alt="Profilna slika"
-              className="w-24 h-24 rounded-full border-4 border-indigo-500 shadow-lg"
-            />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-800">{user.name} {user.surname}</h1>
-          <p className="text-gray-600 italic">Dobrodošli na svoj profil!</p>
-        </div>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow container mx-auto py-12 px-4">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+          <img src={vehicle.image} alt={vehicle.name} className="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-lg" />
+          <div className="flex flex-col gap-4 md:w-1/2 text-black">
+            <h2 className="text-3xl font-bold">{vehicle.name}</h2>
+            <p className="text-lg">{vehicle.description}</p>
+            <p className="text-lg">{vehicle.description2}</p>
+            <p className="text-2xl font-bold">Cena: {vehicle.price} €</p>
 
-        <div className="space-y-4">
-          {/* Ime i Prezime */}
-          <div className="flex items-center space-x-3">
-            <User className="w-6 h-6 text-indigo-500" />
-            <p className="text-gray-700 text-lg">
-              <strong>Ime:</strong> {user.name}
-            </p>
+            {/* Dugme za rezervaciju se prikazuje samo ako je korisnik ulogovan */}
+            {user && (
+              <button className="mt-4 px-6 py-2 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors"
+                onClick={handleReserveClick}>
+                Rezerviši
+              </button>
+            )}
           </div>
-          <div className="flex items-center space-x-3">
-            <User className="w-6 h-6 text-indigo-500" />
-            <p className="text-gray-700 text-lg">
-              <strong>Prezime:</strong> {user.surname}
-            </p>
-          </div>
-
-          {/* Email */}
-          <div className="flex items-center space-x-3">
-            <Mail className="w-6 h-6 text-indigo-500" />
-            <p className="text-gray-700 text-lg">
-              <strong>Email:</strong> {user.email || "Nije unet"}
-            </p>
-          </div>
-
-          {/* Uloga */}
-          <div className="flex items-center space-x-3">
-            <Shield className="w-6 h-6 text-indigo-500" />
-            <p className="text-gray-700 text-lg">
-              <strong>Uloga:</strong> {user.role || "Korisnik"}
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 text-center">
-          <button
-            onClick={() => console.log("Izmena profila")}
-            className="px-6 py-2 bg-indigo-500 text-white font-semibold rounded-lg shadow hover:bg-indigo-600"
-          >
-            Izmeni profil
-          </button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
 
-export default SeeProfile;
+export default Seemore;

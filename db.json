@@ -4,42 +4,42 @@
       "id": "1",
       "name": "Clio",
       "description": "Elegantno i dinamično",
-      "description2":"Renault Clio 2024 donosi osvežen i moderan dizajn s prepoznatljivim LED svetlima u obliku slova C. Unutrašnjost je unapređena kvalitetnim materijalima i velikim ekranom sa naprednim infotainment sistemom. Nudi benzinske, dizel i hibridne motore, uz odličnu kombinaciju ekonomičnosti i performansi.",
+      "description2": "Renault Clio 2024 donosi osvežen i moderan dizajn s prepoznatljivim LED svetlima u obliku slova C. Unutrašnjost je unapređena kvalitetnim materijalima i velikim ekranom sa naprednim infotainment sistemom. Nudi benzinske, dizel i hibridne motore, uz odličnu kombinaciju ekonomičnosti i performansi.",
       "image": "/slike/CLIO.jpg"
     },
     {
       "id": "2",
       "name": "Captur",
       "description": "Prilagodljiv i moderan",
-      "description2":"Renault Captur 2023 je kompaktni SUV koji se ističe atraktivnim izgledom i visokim nivoom personalizacije. Prostrana i funkcionalna unutrašnjost obogaćena je bezbednosnim tehnologijama poput automatskog kočenja. Hibridne verzije čine ga odličnim izborom za ekonomičniju i ekološku vožnju.",
+      "description2": "Renault Captur 2023 je kompaktni SUV koji se ističe atraktivnim izgledom i visokim nivoom personalizacije. Prostrana i funkcionalna unutrašnjost obogaćena je bezbednosnim tehnologijama poput automatskog kočenja. Hibridne verzije čine ga odličnim izborom za ekonomičniju i ekološku vožnju.",
       "image": "/slike/CAPTUR.jpg"
     },
     {
       "id": "3",
       "name": "Austral",
       "description": "Performanse i stil",
-      "description2":"Renault Austral 2023 je elegantan SUV srednje veličine koji kombinuje moderan dizajn i naprednu tehnologiju. Kabina je opremljena digitalnom instrument tablom i velikim ekranom osetljivim na dodir. Austral nudi izbor hibridnih pogona, pružajući udobnu i ekonomičnu vožnju.",
+      "description2": "Renault Austral 2023 je elegantan SUV srednje veličine koji kombinuje moderan dizajn i naprednu tehnologiju. Kabina je opremljena digitalnom instrument tablom i velikim ekranom osetljivim na dodir. Austral nudi izbor hibridnih pogona, pružajući udobnu i ekonomičnu vožnju.",
       "image": "/slike/AUSTRAL.jpg"
     },
     {
       "id": "4",
       "name": "Megane",
       "description": "Privlačna i prefinjena limuzina",
-      "description2":"Renault Megane GrandCoupé 2024 impresionira sofisticiranim dizajnom i aerodinamičnim oblikom. Unutrašnjost je prostrana i luksuzna, sa fokusom na udobnost i napredne vozačke asistencije. Pogonske opcije uključuju benzinske i hibridne motore za efikasnu i dugotrajnu vožnju.",
+      "description2": "Renault Megane GrandCoupé 2024 impresionira sofisticiranim dizajnom i aerodinamičnim oblikom. Unutrašnjost je prostrana i luksuzna, sa fokusom na udobnost i napredne vozačke asistencije. Pogonske opcije uključuju benzinske i hibridne motore za efikasnu i dugotrajnu vožnju.",
       "image": "/slike/MEGANE.jpg"
     },
     {
       "id": "5",
       "name": "Rafale",
       "description": "E-TECH HYBRID",
-      "description2":"Renault Rafale 2024 je SUV kupe futurističkog dizajna s naglaskom na aerodinamiku. Unutrašnjost nudi luksuzne materijale, veliki zakrivljeni ekran i prilagodljivo ambijentalno osvetljenje. Hibridni pogoni donose impresivne performanse uz nisku potrošnju goriva.",
+      "description2": "Renault Rafale 2024 je SUV kupe futurističkog dizajna s naglaskom na aerodinamiku. Unutrašnjost nudi luksuzne materijale, veliki zakrivljeni ekran i prilagodljivo ambijentalno osvetljenje. Hibridni pogoni donose impresivne performanse uz nisku potrošnju goriva.",
       "image": "/slike/RAFALE.jpg"
     },
     {
       "id": "6",
       "name": "Symbioz",
       "description": "E-TECH FULL HYBRID",
-      "description2":"Renault Symbioz 2024 je revolucionarni koncept vozilo sa autonomnim upravljanjem i električnim pogonom. Dizajn je futuristički, dok unutrašnjost pruža osećaj dnevnog boravka, s maksimalnim komforom i interaktivnim funkcijama. Ovaj model integriše vožnju s pametnim domovima, čineći budućnost mobilnosti potpuno povezanu.",
+      "description2": "Renault Symbioz 2024 je revolucionarni koncept vozilo sa autonomnim upravljanjem i električnim pogonom. Dizajn je futuristički, dok unutrašnjost pruža osećaj dnevnog boravka, s maksimalnim komforom i interaktivnim funkcijama. Ovaj model integriše vožnju s pametnim domovima, čineći budućnost mobilnosti potpuno povezanu.",
       "image": "/slike/SYMBIOZ.jpg"
     }
   ],
@@ -72,7 +72,7 @@
       "JMBG": "3001003730015"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Dusan",
       "surname": "Stojiljkovic",
       "username": "dufan",
@@ -137,14 +137,24 @@
   ],
   "classifiedAd": [
     {
-      "id": "1",
-      "idCar": 1,
-      "idPerson": 1
+      "id": "2",
+      "idCar": "1",
+      "idPerson": "4"
     },
     {
-      "id": "2",
-      "idCar": 2,
-      "idPerson": 2
+      "id": "3",
+      "idCar": "2",
+      "idPerson": "4"
+    },
+    {
+      "id": "4",
+      "idCar": "3",
+      "idPerson": "4"
+    },
+    {
+      "id": "5",
+      "idCar": "6",
+      "idPerson": "4"
     }
   ]
 }

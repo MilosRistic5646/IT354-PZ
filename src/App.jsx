@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "@/assets/components/Header";
 import Footer from "@/assets/components/Footer";
@@ -12,15 +12,17 @@ import ContactPage from "@/assets/userPages/ContactPage";
 import LoginForm from "@/assets/components/LoginForm";
 import RegisterPage from "@/assets/userPages/Register";
 import Seemore from "@/assets/userPages/Seemore";
-import SeeProfile from "@/assets/components/SeeProfile"; // Import za profilnu stranicu
+import SeeProfile from "@/assets/components/SeeProfile";
+import ReservedAds from "@/assets/adminPages/ReservedAds"; // Dodali smo novu stranicu
+import { UserContext } from "@/assets/context/UserContext"; 
+import AddAd from "@/assets/ownerPages/AddAd";
 
 const App = () => {
-  const [vehicles, setVehicles] = useState([]); // Stanje za vozila
-  const [user, setUser] = useState(null); // Stanje za korisnika
+  const { user } = useContext(UserContext); 
+  const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
-    // Povlačenje podataka o vozilima iz db.json
-    fetch("/db.json")
+    fetch("http://localhost:3000/car")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP greška! Status: ${response.status}`);
@@ -28,38 +30,30 @@ const App = () => {
         return response.json();
       })
       .then((data) => {
-        const vehiclesWithAds = data.car.map((car) => {
-          const ad = data.ad.find((adItem) => adItem.carId === car.id);
-          return {
-            ...car,
-            price: ad ? ad.price : "N/A",
-            image: ad?.image || "/slike/default.jpg",
-          };
-        });
-        setVehicles(vehiclesWithAds);
+        fetch("http://localhost:3000/ad")
+          .then((res) => res.json())
+          .then((ads) => {
+            const vehiclesWithAds = data.map((car) => {
+              const ad = ads.find((adItem) => adItem.carId == car.id);
+              return {
+                ...car,
+                price: ad ? ad.price : "N/A",
+                image: car.image || "/slike/default.jpg",
+              };
+            });
+            setVehicles(vehiclesWithAds);
+          });
       })
       .catch((error) =>
         console.error("Greška pri učitavanju podataka o vozilima:", error)
       );
   }, []);
 
-  // Funkcija za prijavu
-  const handleLogin = (userData) => {
-    setUser(userData);
-  };
-
-  // Funkcija za odjavu
-  const handleLogout = () => {
-    setUser(null);
-  };
-
   return (
     <Router>
       <div className="bg-gray-100 min-h-screen">
-        {/* Prosleđujemo user i onLogout ka Header komponenti */}
-        <Header user={user} onLogout={handleLogout} />
+        <Header />
 
-        {/* Definisanje ruta */}
         <Routes>
           <Route
             path="/"
@@ -77,15 +71,17 @@ const App = () => {
           <Route path="/vehicles/:id" element={<Seemore />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route
-            path="/login"
-            element={<LoginForm onLogin={handleLogin} />} // Prosleđujemo handleLogin funkciju
-          />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile" element={<SeeProfile user={user} />} /> {/* Nova ruta */}
+          <Route path="/profile" element={<SeeProfile user={user} />} />
+          
+          {/* Dodajemo rutu za administratore */}
+          {user?.role === "admin" && (
+            <Route path="/reserved-ads" element={<ReservedAds />} />
+          )}
+          <Route path="/addad" element={user?.role === "owner" ? <AddAd /> : <Home />} />
         </Routes>
 
-        {/* Zajednički Footer */}
         <Footer />
       </div>
     </Router>

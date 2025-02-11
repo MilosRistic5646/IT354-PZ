@@ -64,7 +64,7 @@ const Carousel = () => {
       {/* Strelica desno */}
       <button
         onClick={nextImage}
-        className="absolute top-1/2 right-5 transform -translate-y-1/2 text-white text-3xl z-10 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75"
+        className="absolute top-1/2 right-5 transform -translate-y-1/2 text-white text-3xl bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75"
       >
         &gt;
       </button>
@@ -73,17 +73,6 @@ const Carousel = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
         <h1 className="text-4xl font-bold">Otkrijte Renault Vozila</h1>
         <p className="mt-4 text-lg">Inovacije koje pokreću vašu svakodnevicu</p>
-        <button
-          onClick={() => navigate("/login")}
-          className="mt-6 px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600"
-        >
-          Uloguj se
-        </button>
-        <button 
-          onClick={() => navigate("/register")}
-          className="mt-6 ml-4 px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900">
-          Registruj se
-        </button>
       </div>
     </div>
   );
