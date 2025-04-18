@@ -8,17 +8,28 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    setError("");
+
+    if (!username || !password) {
+      setError("Unesite korisničko ime i lozinku.");
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const response = await fetch(
         `http://localhost:3000/person?username=${username}&password=${password}`
       );
-      if (!response.ok) throw new Error("Server nije dostupan!");
+
+      if (!response.ok) throw new Error("Server nije dostupan.");
 
       const data = await response.json();
 
-      if (data.length > 0) {
+      if (data.length === 1) {
         const user = data[0];
         login(user);
         navigate("/");
@@ -28,6 +39,8 @@ const LoginForm = () => {
     } catch (error) {
       console.error("Greška:", error);
       setError("Došlo je do greške. Pokušajte ponovo kasnije.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,9 +71,14 @@ const LoginForm = () => {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition"
+          disabled={!username || !password || loading}
+          className={`w-full font-semibold py-2 rounded-lg transition ${
+            !username || !password || loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600 text-white"
+          }`}
         >
-          Prijavi se
+          {loading ? "Prijavljivanje..." : "Prijavi se"}
         </button>
 
         <div className="mt-4 text-center">
