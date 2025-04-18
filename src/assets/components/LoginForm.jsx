@@ -11,16 +11,16 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:3000/person");
+      const response = await fetch(
+        `http://localhost:3000/person?username=${username}&password=${password}`
+      );
       if (!response.ok) throw new Error("Server nije dostupan!");
 
-      const users = await response.json();
-      const user = users.find(
-        (u) => u.username === username && u.password === password
-      );
+      const data = await response.json();
 
-      if (user) {
-        login(user); // Postavlja korisnika u kontekst
+      if (data.length > 0) {
+        const user = data[0];
+        login(user);
         navigate("/");
       } else {
         setError("Neispravno korisničko ime ili lozinka.");
@@ -32,9 +32,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+    <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 p-8 rounded shadow-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-white">
           Prijava
         </h2>
 
@@ -45,7 +45,7 @@ const LoginForm = () => {
           placeholder="Korisničko ime"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 mb-4"
+          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring focus:ring-blue-300 mb-4"
         />
 
         <input
@@ -53,19 +53,20 @@ const LoginForm = () => {
           placeholder="Lozinka"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300 mb-6"
+          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring focus:ring-blue-300 mb-6"
         />
 
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600"
+          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition"
         >
           Prijavi se
         </button>
 
         <div className="mt-4 text-center">
-          <p className="text-gray-600">Nemate nalog? 
-            <button 
+          <p className="text-gray-600 dark:text-gray-300">
+            Nemate nalog?
+            <button
               onClick={() => navigate("/register")}
               className="text-blue-500 hover:underline ml-1"
             >

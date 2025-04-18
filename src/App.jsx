@@ -13,12 +13,13 @@ import LoginForm from "@/assets/components/LoginForm";
 import RegisterPage from "@/assets/userPages/Register";
 import Seemore from "@/assets/userPages/Seemore";
 import SeeProfile from "@/assets/components/SeeProfile";
-import ReservedAds from "@/assets/adminPages/ReservedAds"; // Dodali smo novu stranicu
-import { UserContext } from "@/assets/context/UserContext"; 
+import ReservedAds from "@/assets/adminPages/ReservedAds";
+import { UserContext } from "@/assets/context/UserContext";
 import AddAd from "@/assets/ownerPages/AddAd";
+import EditProfile from "@/assets/userPages/EditProfile";
 
 const App = () => {
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
   const [vehicles, setVehicles] = useState([]);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
         <Header />
 
         <Routes>
@@ -74,8 +75,8 @@ const App = () => {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/profile" element={<SeeProfile user={user} />} />
-          
-          {/* Dodajemo rutu za administratore */}
+          <Route path="/edit-profile" element={<EditProfile user={user} />} />
+
           {user?.role === "admin" && (
             <Route path="/reserved-ads" element={<ReservedAds />} />
           )}

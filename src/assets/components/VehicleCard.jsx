@@ -62,23 +62,37 @@ const VehicleCard = ({ id, name, description, price, image, onDelete }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <img src={image || "/slike/default.jpg"} alt={name} className="w-full h-48 object-cover rounded-t-lg" onError={(e) => (e.target.src = "/slike/default.jpg")} />
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <img
+        src={image || "/slike/default.jpg"}
+        alt={name}
+        className="w-full h-48 object-cover rounded-t-lg"
+        onError={(e) => (e.target.src = "/slike/default.jpg")}
+      />
       <div className="mt-4">
-        <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
-        <p className="text-gray-600 mt-2">{description}</p>
-        <p className="text-lg font-bold text-gray-800 mt-4">Cena: {price} €</p>
-        <div className="mt-6 flex">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{name}</h3>
+        <p className="text-gray-600 dark:text-gray-300 mt-2">{description}</p>
+        <p className="text-lg font-bold text-gray-800 dark:text-white mt-4">Cena po danu: {price} €</p>
+        <div className="mt-6 flex flex-wrap gap-3">
           {user && user.role === "customer" && (
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300" onClick={handleReserveClick}>
-              Rezerviši
+            <button
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              onClick={handleReserveClick}
+            >
+              Iznajmi
             </button>
           )}
-          <button className="px-4 ml-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-300" onClick={() => navigate(`/vehicles/${id}`)}>
+          <button
+            className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-300"
+            onClick={() => navigate(`/vehicles/${id}`)}
+          >
             Saznaj više
           </button>
           {user && user.role === "owner" && (
-            <button className="px-4 ml-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300" onClick={handleDelete}>
+            <button
+              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-300"
+              onClick={handleDelete}
+            >
               Ukloni oglas
             </button>
           )}

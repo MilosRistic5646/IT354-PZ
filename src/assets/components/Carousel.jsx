@@ -71,8 +71,8 @@ const Carousel = () => {
 
       {/* Sadržaj preko pozadinske slike */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h1 className="text-4xl font-bold">Otkrijte Renault Vozila</h1>
-        <p className="mt-4 text-lg">Inovacije koje pokreću vašu svakodnevicu</p>
+        <h1 className="text-4xl font-bold">Rentujte Renault Vozila</h1>
+        <p className="mt-4 text-lg">Udobnost i sigurnost su zagarantovani</p>
       </div>
     </div>
   );

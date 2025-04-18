@@ -79,38 +79,56 @@
       "password": "dufandufan",
       "JMBG": "1002003004005",
       "role": "customer"
+    },
+    {
+      "id": "5",
+      "name": "Mateja",
+      "surname": "Stojanovic",
+      "username": "mata",
+      "password": "123456789",
+      "JMBG": "1111111111111",
+      "role": "customer"
+    },
+    {
+      "id": "6",
+      "name": "Petar",
+      "surname": "Peric",
+      "username": "perica",
+      "password": "777777777",
+      "JMBG": "2222222222222",
+      "role": "customer"
     }
   ],
   "ad": [
     {
       "id": "1",
       "carId": 1,
-      "price": 15000
+      "price": 150
     },
     {
       "id": "2",
       "carId": 2,
-      "price": 35000
+      "price": 350
     },
     {
       "id": "3",
       "carId": 3,
-      "price": 30000
+      "price": 300
     },
     {
       "id": "4",
       "carId": 4,
-      "price": 25000
+      "price": 250
     },
     {
       "id": "5",
       "carId": 5,
-      "price": 45000
+      "price": 450
     },
     {
       "id": "6",
       "carId": 6,
-      "price": 55000
+      "price": 550
     }
   ],
   "carousel": [
@@ -155,6 +173,42 @@
       "id": "5",
       "idCar": "6",
       "idPerson": "4"
+    },
+    {
+      "id": "6",
+      "idCar": "5",
+      "idPerson": "4"
+    },
+    {
+      "id": "7",
+      "idCar": "1",
+      "idPerson": "4"
+    },
+    {
+      "id": "9",
+      "idCar": "6",
+      "idPerson": "4"
+    },
+    {
+      "id": "10",
+      "idCar": "1",
+      "idPerson": "6"
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "name": "Milos",
+      "email": "milos.test@gmail.com",
+      "message": "teestetdetsdgdsgsdgsd",
+      "date": "2025-04-17T19:46:43.783Z"
+    },
+    {
+      "id": "9a37",
+      "name": "Pera",
+      "email": "pera.test@gmail.com",
+      "message": "asfsdgdfgasfsdgasasvdssg",
+      "date": "2025-04-17T19:48:58.502Z"
     }
   ]
 }

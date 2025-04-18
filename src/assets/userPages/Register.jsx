@@ -4,35 +4,25 @@ import RegisterForm from "../components/RegisterForm";
 const RegisterPage = () => {
   const handleRegister = async (formData) => {
     try {
-      // Fetch postojeće korisnike
       const response = await fetch("http://localhost:3000/person");
-
-      if (!response.ok) {
-        throw new Error(`Greška: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`Greška: ${response.status}`);
 
       const existingUsers = await response.json();
-      console.log("Postojeći korisnici:", existingUsers);
 
-      // Pronalaženje najvećeg ID-a uz konverziju u brojeve
       const maxId = existingUsers.reduce((max, user) => {
-        const currentId = Number(user.id); // Konvertujemo u broj
+        const currentId = Number(user.id);
         return currentId > max ? currentId : max;
       }, 0);
 
-      // Postavi ID za novog korisnika
       const newPerson = {
-        id: maxId + 1, // Autoinkrement na osnovu postojećih korisnika
+        id: maxId + 1,
         ...formData,
         role: "customer",
       };
 
-      // Pošalji novog korisnika na server
       const postResponse = await fetch("http://localhost:3000/person", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newPerson),
       });
 
@@ -48,7 +38,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen">
       <main className="py-8">
         <RegisterForm onSubmit={handleRegister} />
       </main>

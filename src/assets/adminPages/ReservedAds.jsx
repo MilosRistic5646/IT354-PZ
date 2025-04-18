@@ -44,14 +44,14 @@ const ReservedAds = () => {
     <div className="flex flex-col min-h-screen">
       {/* Glavni sadržaj */}
       <main className="container mx-auto py-8 flex-grow pb-20">
-        <h1 className="text-2xl font-bold mb-6 text-black text-center">Rezervisani Oglasi</h1>
+        <h1 className="text-2xl font-bold mb-6 text-black text-center dark:text-white">Iznajmljeni automobili</h1>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white shadow-md rounded-lg">
             <thead className="bg-gray-500">
               <tr>
                 <th className="py-4 px-6">Ime Korisnika</th>
                 <th className="py-4 px-6">Naziv Automobila</th>
-                <th className="py-4 px-6">Cena</th>
+                <th className="py-4 px-6">Cena po danu</th>
               </tr>
             </thead>
             <tbody>
@@ -71,19 +71,11 @@ const ReservedAds = () => {
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan="3" className="py-4 px-6 bg-gray-100 text-center font-semibold">
-                  Kraj liste oglasa
-                </td>
               </tr>
             </tfoot>
           </table>
         </div>
-      </main>
-
-      {/* Footer koji uvek ostaje na dnu */}
-      <footer className="bg-gray-100 text-center py-4 mt-auto">
-        © 2024 Renault Srbija.
-      </footer>
+      </main> 
     </div>
   );
 };

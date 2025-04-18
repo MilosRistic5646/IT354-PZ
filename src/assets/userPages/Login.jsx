@@ -28,22 +28,36 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">Prijava</h2>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <form onSubmit={handleLogin} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-96">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Prijava</h2>
 
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded mb-3" required />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded mb-3 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          required
+        />
 
-        <input type="password" placeholder="Lozinka" value={password} onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border rounded mb-3" required />
+        <input
+          type="password"
+          placeholder="Lozinka"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded mb-3 bg-white dark:bg-gray-700 text-gray-800 dark:text-white"
+          required
+        />
 
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition">
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
+        >
           Prijavi se
         </button>
 
-        {/* Dodajemo pitanje i link ka registraciji */}
-        <p className="mt-4 text-center text-gray-600">
+        <p className="mt-4 text-center text-gray-600 dark:text-gray-300">
           Nemate nalog?{" "}
           <a href="/register" className="text-blue-600 hover:underline">
             Registrujte se ovde

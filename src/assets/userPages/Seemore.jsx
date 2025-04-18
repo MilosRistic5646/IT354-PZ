@@ -5,7 +5,7 @@ import { UserContext } from "@/assets/context/UserContext";
 
 const Seemore = () => {
   const { id } = useParams();
-  const { user } = useContext(UserContext); // Korisnik iz konteksta
+  const { user } = useContext(UserContext);
   const [vehicle, setVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,12 +41,14 @@ const Seemore = () => {
     try {
       const classifiedAdResponse = await fetch("http://localhost:3000/classifiedAd");
       const classifiedAds = await classifiedAdResponse.json();
-      const maxId = classifiedAds.length > 0 ? Math.max(...classifiedAds.map(ad => parseInt(ad.id))) : 0;
+      const maxId = classifiedAds.length > 0
+        ? Math.max(...classifiedAds.map(ad => parseInt(ad.id)))
+        : 0;
 
       const reservation = {
         id: (maxId + 1).toString(),
         idCar: vehicle.id,
-        idPerson: user.id, // Koristi user.id iz konteksta
+        idPerson: user.id,
       };
 
       const postResponse = await fetch("http://localhost:3000/classifiedAd", {
@@ -66,26 +68,34 @@ const Seemore = () => {
     }
   };
 
-  if (loading) return <div className="flex-grow text-center">Učitavanje...</div>;
-  if (error) return <div className="flex-grow text-center text-red-500">Greška: {error}</div>;
-  if (!vehicle) return <div className="flex-grow text-center">Vozilo nije pronađeno.</div>;
+  if (loading) 
+    return <div className="flex-grow text-center text-gray-800 dark:text-white">Učitavanje...</div>;
+  if (error) 
+    return <div className="flex-grow text-center text-red-500 dark:text-red-400">Greška: {error}</div>;
+  if (!vehicle) 
+    return <div className="flex-grow text-center text-gray-800 dark:text-white">Vozilo nije pronađeno.</div>;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
       <div className="flex-grow container mx-auto py-12 px-4">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
-          <img src={vehicle.image} alt={vehicle.name} className="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-lg" />
-          <div className="flex flex-col gap-4 md:w-1/2 text-black">
+          <img
+            src={vehicle.image}
+            alt={vehicle.name}
+            className="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-lg"
+          />
+          <div className="flex flex-col gap-4 md:w-1/2 text-black dark:text-white">
             <h2 className="text-3xl font-bold">{vehicle.name}</h2>
             <p className="text-lg">{vehicle.description}</p>
             <p className="text-lg">{vehicle.description2}</p>
-            <p className="text-2xl font-bold">Cena: {vehicle.price} €</p>
+            <p className="text-2xl font-bold">Cena po danu: {vehicle.price} €</p>
 
-            {/* Dugme za rezervaciju se prikazuje samo ako je korisnik ulogovan */}
-            {user && (
-              <button className="mt-4 px-6 py-2 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors"
-                onClick={handleReserveClick}>
-                Rezerviši
+            {user && user.role === "customer" && (
+              <button
+                className="mt-4 px-6 py-2 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors"
+                onClick={handleReserveClick}
+              >
+                Iznajmi
               </button>
             )}
           </div>

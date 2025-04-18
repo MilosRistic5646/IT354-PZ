@@ -67,14 +67,14 @@ const VehicleCard = ({ id, name, description, price, image }) => {
       <div className="mt-4">
         <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
         <p className="text-gray-600 mt-2">{description}</p>
-        <p className="text-lg font-bold text-gray-800 mt-4">Cena: {price} €</p> {/* Prikazivanje cene */}
+        <p className="text-lg font-bold text-gray-800 mt-4">Cena po danu: {price} €</p> {/* Prikazivanje cene */}
         {errorMessage && <p className="text-red-500">{errorMessage}</p>} {/* Prikazivanje greške */}
         <div className="mt-6 flex">
           <button 
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
             onClick={handleReserveClick} // Dodavanje onClick handler-a
           >
-            Rezerviši
+            Iznajmi
           </button>
           <button
             className="px-4 ml-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-300"
